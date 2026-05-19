@@ -1,0 +1,33 @@
+<!-- @autor LaMendez -->
+
+<section class="profile-feed">
+  <div class="profile-feed__tabs" role="tablist">
+    <button class="profile-feed__tab" [class.profile-feed__tab--active]="activeTab()==='publicaciones'" (click)="setTab('publicaciones')" type="button">
+      <span class="material-symbols-outlined">grid_view</span> Publicaciones
+    </button>
+    <button class="profile-feed__tab" [class.profile-feed__tab--active]="activeTab()==='comentadas'" (click)="setTab('comentadas')" type="button">
+      <span class="material-symbols-outlined">chat_bubble</span> Comentadas
+    </button>
+    <button class="profile-feed__tab" [class.profile-feed__tab--active]="activeTab()==='guardado'" (click)="setTab('guardado')" type="button">
+      <span class="material-symbols-outlined">bookmark</span> Guardado
+    </button>
+  </div>
+
+  <div class="profile-feed__empty">
+    <div class="profile-feed__empty-icon">
+      <span class="material-symbols-outlined">article</span>
+    </div>
+    <h2 class="profile-feed__empty-title">Aún no tienes ninguna publicación</h2>
+    <p class="profile-feed__empty-desc">Empieza a compartir tus hallazgos, dilemas o investigaciones con la comunidad.</p>
+    <button class="profile-feed__empty-btn" type="button">Crear primera publicación</button>
+  </div>
+
+  <div class="profile-feed__topics">
+    <h3 class="profile-feed__topics-heading">Temas de interés para ti</h3>
+    <div class="profile-feed__topic-list">
+      @for (topic of topics; track topic) {
+        <span class="profile-feed__topic-tag">{{ topic }}</span>
+      }
+    </div>
+  </div>
+</section>

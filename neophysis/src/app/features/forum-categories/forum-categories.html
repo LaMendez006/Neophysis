@@ -1,0 +1,22 @@
+<!-- @autor LaMendez -->
+<section class="forum-cats">
+  <div class="forum-cats__header">
+    <div>
+      <h2 class="forum-cats__title">Disciplinas de enfoque</h2>
+      <p class="forum-cats__subtitle">Lorem ipsum dolor sit amet consectetur adipiscing elit ante</p>
+    </div>
+    <button class="forum-cats__see-all" type="button">Ver todas las disciplinas</button>
+  </div>
+  <div class="forum-cats__grid">
+    @for (cat of categories; track cat.label) {
+      <div class="cat-card" [class.cat-card--dark]="cat.dark">
+        <div class="cat-card__icon"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">{{ cat.icon }}</span></div>
+        <div class="cat-card__body">
+          <h3 class="cat-card__name">{{ cat.label }}</h3>
+          <p class="cat-card__desc">{{ cat.description }}</p>
+          <span class="cat-card__count">{{ cat.count }}</span>
+        </div>
+      </div>
+    }
+  </div>
+</section>
