@@ -3,7 +3,20 @@
 .forum-posts__heading { font-family: var(--font-headline); font-size: 1.25rem; font-weight: 700; color: var(--primary); }
 .forum-posts__sort { display: flex; gap: 0.5rem; }
 .forum-posts__sort-btn { padding: 0.5rem 1rem; border: none; border-radius: var(--border-radius-full); font-family: var(--font-label); font-size: 0.8125rem; font-weight: 500; background: transparent; color: var(--on-surface-variant); cursor: pointer; transition: background 0.2s, color 0.2s; &:hover { background: var(--surface-container-low); } &--active { background: var(--surface-container-high); color: var(--primary); font-weight: 600; } }
+.forum-posts__actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+.forum-posts__heading-group { display: flex; flex-direction: column; gap: 0.5rem; }
+.forum-posts__active-filter { font-family: var(--font-body); font-size: 0.875rem; color: var(--on-surface-variant); }
+.forum-posts__search { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem; background: var(--surface-container); border-radius: var(--border-radius-full); width: min(100%, 18rem); }
+.forum-posts__search input { border: none; background: transparent; outline: none; width: 100%; font-family: var(--font-body); color: var(--on-surface); }
+.forum-posts__toast { position: fixed; bottom: 1.5rem; right: 1.5rem; background: var(--surface-container); border: 1px solid var(--surface-border); border-radius: var(--border-radius-lg); padding: 0.85rem 1rem; opacity: 0; transform: translateY(12px); transition: opacity 0.2s ease, transform 0.2s ease; pointer-events: none; z-index: 10; }
+.forum-posts__toast--visible { opacity: 1; transform: translateY(0); }
 .forum-posts__list { display: flex; flex-direction: column; gap: 1.5rem; }
+.post-card__tag-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+.post-card__tag { background: var(--surface-container); color: var(--on-surface-variant); padding: 0.35rem 0.75rem; border-radius: var(--border-radius-full); font-family: var(--font-label); font-size: 0.75rem; }
+.post-card__vote-btn--active { background: var(--secondary); color: #fff; }
+.post-card__comments { border-top: 1px solid var(--surface-border); margin-top: 1.5rem; padding-top: 1rem; display: grid; gap: 0.75rem; }
+.post-card__comment { display: grid; grid-template-columns: auto 1fr; gap: 0.75rem; align-items: flex-start; background: var(--surface-container); border-radius: var(--border-radius-lg); padding: 0.85rem 1rem; }
+.post-card__comment p { margin: 0; font-family: var(--font-body); font-size: 0.875rem; color: var(--on-surface-variant); line-height: 1.5; }
 
 .post-card { background: var(--surface-container-lowest); padding: 2rem; border-radius: 1.5rem; box-shadow: 0 8px 32px rgba(6,30,41,0.03); border: 1px solid rgba(193,199,205,0.2); display: flex; gap: 2rem; transition: box-shadow 0.2s; &:hover { box-shadow: 0 12px 48px rgba(6,30,41,0.07); } }
 .post-card__votes { display: none; flex-direction: column; align-items: center; gap: 0.5rem; flex-shrink: 0; @media (min-width: 640px) { display: flex; } }

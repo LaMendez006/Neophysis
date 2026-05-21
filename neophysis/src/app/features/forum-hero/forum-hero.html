@@ -2,12 +2,11 @@
 <section class="forum-hero">
   <div class="forum-hero__inner">
     <div class="forum-hero__content">
-      <span class="forum-hero__badge">AUTOR</span>
+      <span class="forum-hero__badge">La Mendez</span>
       <h1 class="forum-hero__title">La importancia de la<br><span class="forum-hero__accent">Biotecnología.</span></h1>
       <p class="forum-hero__desc">Lorem ipsum dolor sit amet consectetur adipiscing elit ante dictumst at, augue venenatis habitasse convallis ut sagittis inceptos eget a sollicitudin, arcu etiam</p>
       <div class="forum-hero__actions">
-        <button class="forum-hero__btn forum-hero__btn--primary" type="button">Reseñas</button>
-        <button class="forum-hero__btn forum-hero__btn--ghost" type="button">Explorar Categorías</button>
+        <button class="forum-hero__btn forum-hero__btn--primary" type="button" (click)="exploreCategories.emit()">Explorar Categorías</button>
       </div>
     </div>
     <div class="forum-hero__deco" aria-hidden="true">

@@ -3,11 +3,11 @@
   <app-sidebar-nav />
   <main>
     <app-neo-header />
-    <app-forum-hero />
-    <app-forum-categories />
+    <app-forum-hero (exploreCategories)="scrollToCategories()" />
+    <app-forum-categories (categorySelected)="onCategorySelected($event)" />
     <div class="forum-feed-layout">
-      <app-forum-posts />
-      <app-forum-trending />
+      <app-forum-posts [categoryFilter]="selectedCategory()" [tagFilter]="selectedTag()" />
+      <app-forum-trending (tagSelected)="onTagSelected($event)" />
     </div>
     <app-footer />
   </main>

@@ -7,29 +7,37 @@
   flex-direction: column;
   justify-content: flex-end;
   padding: 3rem;
+  /* Combine the primary color with the background image to fill the
+     whole panel and keep the form area separate. */
   background-color: var(--primary);
+  background-image:
+    linear-gradient(90deg, rgba(0,61,83,1) 0%, rgba(0,61,83,0.95) 35%, rgba(0,61,83,0.65) 65%, rgba(0,61,83,0.2) 100%),
+    url('https://lh3.googleusercontent.com/aida-public/AB6AXuBdvdGCFeX0uOQQtk_CPHwbcmBgpZFfeq9AAHnyrVDjjWJ6c5dpTwLmBzs6BqBJJPhBv7YRlNB3KHVXfvq7yJuk6kpwMwWcxKdE2jpUWz5RZraMC-_oABvSIZPBXmk_SbKrZMghZicdw7X6bOD0ESui2Cj7bZc2709l0S1u-eR4NXOtOea79cjaarA3DuYMoLbB_UIn9t8wDLZV-B4kZXSQYAvCTSOKftGykju3ZZtGHb5Ec5pmm3DWomM1Ur5e6Hnsgol1XhGkPYzE');
+  background-blend-mode: overlay;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
   color: #fff;
 
   @media (min-width: 768px) {
     display: flex;
-    width: 41.666%;
-    flex-shrink: 0;
+    width: 100%;
+    min-height: 100%;
   }
 }
 
 .auth-panel__bg {
   position: absolute;
   inset: 0;
-  opacity: 0.4;
-  mix-blend-mode: overlay;
-
-  img { width: 100%; height: 100%; object-fit: cover; }
+  /* hide the bg element now that the image is applied to the parent */
+  display: none;
 }
 
 .auth-panel__gradient {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, var(--primary), rgba(0,61,83,0.4), transparent);
+  /* hide gradient: we'll control contrast via color overlays if needed */
+  display: none;
 }
 
 .auth-panel__content {

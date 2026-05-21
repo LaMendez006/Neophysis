@@ -28,6 +28,55 @@
   text-align: center;
 }
 
+.profile-card__edit-form {
+  display: grid;
+  gap: 1rem;
+  width: 100%;
+  text-align: left;
+}
+
+.profile-card__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.profile-card__label {
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.profile-card__input,
+.profile-card__textarea {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--surface-border);
+  background: var(--surface-container);
+  color: var(--on-surface);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.profile-card__textarea { resize: vertical; min-height: 6rem; }
+
+.profile-card__edit-actions {
+  display: flex;
+  gap: 0.75rem;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.profile-card__edit-btn--primary {
+  background: var(--secondary);
+  color: var(--on-secondary);
+}
+
 .profile-card__avatar-wrap {
   width: 6rem; height: 6rem;
   border-radius: 50%;

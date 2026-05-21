@@ -5,26 +5,62 @@
     <h1 class="register-form__title">Crea tu cuenta</h1>
   </header>
 
-  <form class="register-form__form" (ngSubmit)="false">
+  <form [formGroup]="form" class="register-form__form" (ngSubmit)="submit()">
     <div class="register-form__row">
       <div class="register-form__field">
         <label class="register-form__label" for="firstName">Nombre</label>
-        <input class="register-form__input" id="firstName" type="text" placeholder="Nombre" autocomplete="given-name" />
+        <input class="register-form__input" id="firstName" type="text" placeholder="Nombre" autocomplete="given-name" formControlName="firstName" />
       </div>
       <div class="register-form__field">
         <label class="register-form__label" for="lastName">Apellido</label>
-        <input class="register-form__input" id="lastName" type="text" placeholder="Apellido" autocomplete="family-name" />
+        <input class="register-form__input" id="lastName" type="text" placeholder="Apellido" autocomplete="family-name" formControlName="lastName" />
       </div>
     </div>
+
     <div class="register-form__field">
       <label class="register-form__label" for="email">Correo electrónico</label>
-      <input class="register-form__input" id="email" type="email" placeholder="jane.doe@lab.org" autocomplete="email" />
+      <input class="register-form__input" id="email" type="email" placeholder="jane.doe@lab.org" autocomplete="email" formControlName="email" />
+      <p *ngIf="getEmailError()" [ngClass]="getEmailErrorClass()">{{ getEmailError() }}</p>
     </div>
+
+    <div class="register-form__field">
+      <label class="register-form__label" for="location">Ubicación</label>
+      <input class="register-form__input" id="location" type="text" placeholder="Ciudad, país" formControlName="location" />
+      <p *ngIf="form.get('location')?.invalid && (form.get('location')?.touched || form.get('location')?.dirty)" class="register-form__error">La ubicación es obligatoria.</p>
+    </div>
+
+    <div class="register-form__field">
+      <label class="register-form__label" for="username">Nombre de usuario</label>
+      <input class="register-form__input" id="username" type="text" placeholder="Usuario único" formControlName="username" />
+      <p class="register-form__helper">{{ usernameMessage() }}</p>
+    </div>
+
     <div class="register-form__field">
       <label class="register-form__label" for="password">Contraseña</label>
-      <input class="register-form__input" id="password" type="password" placeholder="Mín. 12 caracteres" autocomplete="new-password" />
+      <input class="register-form__input" id="password" type="password" placeholder="Mín. 8 caracteres" autocomplete="new-password" formControlName="password" />
+      <div class="register-form__strength" [ngClass]="getPasswordStrengthClass()" aria-hidden="true">
+        <span class="register-form__strength-bar register-form__strength-bar--first"></span>
+        <span class="register-form__strength-bar register-form__strength-bar--second" [class.register-form__strength-bar--active]="getPasswordStrength() === 'media' || getPasswordStrength() === 'fuerte'"></span>
+        <span class="register-form__strength-bar register-form__strength-bar--third" [class.register-form__strength-bar--active]="getPasswordStrength() === 'fuerte'"></span>
+      </div>
+      <p class="register-form__hint">{{ getPasswordHint() }}</p>
     </div>
-    <button class="register-form__submit" type="submit">Regístrate</button>
+
+    <div class="register-form__field">
+      <label class="register-form__label" for="confirmPassword">Confirmar contraseña</label>
+      <input class="register-form__input" id="confirmPassword" type="password" placeholder="Repite tu contraseña" autocomplete="new-password" formControlName="confirmPassword" />
+      <p *ngIf="!passwordsMatch() && (form.get('confirmPassword')?.touched || form.get('confirmPassword')?.dirty)" class="register-form__error">Las contraseñas deben coincidir.</p>
+    </div>
+
+    <div class="register-form__actions">
+      <button class="register-form__submit" type="submit" [disabled]="isSubmitting() || !canSubmit()">
+        <span *ngIf="isSubmitting()" class="register-form__spinner" aria-hidden="true"></span>
+        <span *ngIf="isSubmitting()">Creando cuenta...</span>
+        <span *ngIf="!isSubmitting()">Crear cuenta</span>
+      </button>
+    </div>
+
+    <p *ngIf="registrationSuccess()" class="register-form__status register-form__status--success">{{ registrationSuccess() }}</p>
   </form>
 
   <footer class="register-form__footer">

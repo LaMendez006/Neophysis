@@ -2,32 +2,83 @@
 
 <section class="profile-feed">
   <div class="profile-feed__tabs" role="tablist">
-    <button class="profile-feed__tab" [class.profile-feed__tab--active]="activeTab()==='publicaciones'" (click)="setTab('publicaciones')" type="button">
+    <button class="profile-feed__tab" [class.profile-feed__tab--active]="activeTab() === 'publicaciones'" (click)="setTab('publicaciones')" type="button">
       <span class="material-symbols-outlined">grid_view</span> Publicaciones
     </button>
-    <button class="profile-feed__tab" [class.profile-feed__tab--active]="activeTab()==='comentadas'" (click)="setTab('comentadas')" type="button">
+    <button class="profile-feed__tab" [class.profile-feed__tab--active]="activeTab() === 'comentadas'" (click)="setTab('comentadas')" type="button">
       <span class="material-symbols-outlined">chat_bubble</span> Comentadas
     </button>
-    <button class="profile-feed__tab" [class.profile-feed__tab--active]="activeTab()==='guardado'" (click)="setTab('guardado')" type="button">
+    <button class="profile-feed__tab" [class.profile-feed__tab--active]="activeTab() === 'guardado'" (click)="setTab('guardado')" type="button">
       <span class="material-symbols-outlined">bookmark</span> Guardado
     </button>
   </div>
 
-  <div class="profile-feed__empty">
-    <div class="profile-feed__empty-icon">
-      <span class="material-symbols-outlined">article</span>
-    </div>
-    <h2 class="profile-feed__empty-title">Aún no tienes ninguna publicación</h2>
-    <p class="profile-feed__empty-desc">Empieza a compartir tus hallazgos, dilemas o investigaciones con la comunidad.</p>
-    <button class="profile-feed__empty-btn" type="button">Crear primera publicación</button>
+  <div class="profile-feed__content">
+    <ng-container *ngIf="activeTab() === 'publicaciones'">
+      <div class="profile-feed__empty">
+        <div class="profile-feed__empty-icon">
+          <span class="material-symbols-outlined">article</span>
+        </div>
+        <h2 class="profile-feed__empty-title">Aún no tienes ninguna publicación</h2>
+        <p class="profile-feed__empty-desc">Empieza a compartir tus hallazgos, dilemas o investigaciones con la comunidad.</p>
+        <a class="profile-feed__empty-btn" routerLink="/registro">Crear primera publicación</a>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="activeTab() === 'comentadas'">
+      <div *ngIf="comments().length > 0; else noComments" class="profile-feed__comments-list">
+        <article *ngFor="let comment of comments()" class="profile-feed__comment-card">
+          <div>
+            <p class="profile-feed__comment-post">Comentado en: {{ comment.postTitle }}</p>
+            <p class="profile-feed__comment-text">{{ comment.text }}</p>
+          </div>
+          <span class="profile-feed__comment-time">{{ comment.time }}</span>
+        </article>
+      </div>
+      <ng-template #noComments>
+        <div class="profile-feed__empty">
+          <div class="profile-feed__empty-icon">
+            <span class="material-symbols-outlined">chat_bubble</span>
+          </div>
+          <h2 class="profile-feed__empty-title">Todavía no has comentado nada</h2>
+          <p class="profile-feed__empty-desc">Sigue a tu comunidad para empezar a interactuar con publicaciones y debates.</p>
+        </div>
+      </ng-template>
+    </ng-container>
+    <ng-container *ngIf="activeTab() === 'guardado'">
+      <ng-container *ngIf="bookmarkedPosts().length > 0; else emptySaved">
+        <div class="profile-feed__saved-list">
+          <article *ngFor="let post of bookmarkedPosts()" class="profile-feed__saved-card">
+            <div>
+              <p class="profile-feed__saved-category">{{ post.category }}</p>
+              <h3 class="profile-feed__saved-title">{{ post.title }}</h3>
+              <p class="profile-feed__saved-meta">{{ post.author }} • {{ post.time }}</p>
+            </div>
+            <span class="material-symbols-outlined profile-feed__saved-icon">bookmark</span>
+          </article>
+        </div>
+      </ng-container>
+      <ng-template #emptySaved>
+        <div class="profile-feed__empty">
+          <div class="profile-feed__empty-icon">
+            <span class="material-symbols-outlined">bookmark</span>
+          </div>
+          <h2 class="profile-feed__empty-title">No hay publicaciones guardadas</h2>
+          <p class="profile-feed__empty-desc">Guarda tus artículos favoritos para revisarlos después.</p>
+        </div>
+      </ng-template>
+    </ng-container>
   </div>
 
   <div class="profile-feed__topics">
     <h3 class="profile-feed__topics-heading">Temas de interés para ti</h3>
     <div class="profile-feed__topic-list">
-      @for (topic of topics; track topic) {
-        <span class="profile-feed__topic-tag">{{ topic }}</span>
-      }
+      <button *ngFor="let topic of selectedTopics()" class="profile-feed__topic-tag" type="button" (click)="removeTopic(topic)">
+          {{ topic }} <span class="material-symbols-outlined">close</span>
+        </button>
+    </div>
+    <div class="profile-feed__topic-form">
+      <input class="profile-feed__topic-input" type="text" placeholder="Agregar tema" [value]="newTopic()" (input)="newTopic.set($event.target.value)" />
+      <button class="profile-feed__topic-add" type="button" (click)="addTopic()">Agregar</button>
     </div>
   </div>
 </section>
