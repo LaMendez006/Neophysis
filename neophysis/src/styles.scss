@@ -1,0 +1,144 @@
+/** @autor LaMendez */
+
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  /* Colores principales */
+  --primary:                #003d53;
+  --primary-container:      #1d546d;
+  --on-primary:             #ffffff;
+  --on-primary-container:   #95c7e4;
+  --primary-fixed:          #c2e8ff;
+
+  --secondary:              #2f676a;
+  --secondary-container:    #b2eaed;
+  --secondary-fixed-dim:    #99d0d3;
+  --on-secondary:           #ffffff;
+  --on-secondary-fixed-variant: #114e51;
+
+  --tertiary:               #243a46;
+  --tertiary-fixed-dim:     #b3cad9;
+  --on-tertiary-fixed:      #061e29;
+
+  --surface:                #f8f9f9;
+  --surface-container:      #edeeee;
+  --surface-container-low:  #f3f4f4;
+  --surface-container-high: #e7e8e8;
+  --surface-container-lowest: #ffffff;
+
+  --on-surface:             #191c1c;
+  --on-surface-variant:     #41484c;
+  --outline-variant:        #c1c7cd;
+
+  /* Tipografía */
+  --font-headline: 'Manrope', sans-serif;
+  --font-body:     'Inter', sans-serif;
+  --font-label:    'Inter', sans-serif;
+
+  /* Radios */
+  --border-radius:      0.25rem;
+  --border-radius-lg:   0.5rem;
+  --border-radius-full: 9999px;
+
+  /* Layout */
+  --sidebar-width:    256px;
+  --sidebar-gradient: linear-gradient(to bottom, #003d53, #1d546d);
+  --color-sidebar:    #1d546d;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--surface);
+  color: var(--on-surface);
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+  -webkit-font-smoothing: antialiased;
+}
+
+app-root {
+  display: block;
+  flex: 1 1 auto;
+  width: 100%;
+  min-width: 0;
+  min-height: 100dvh;
+}
+
+/* Layout con sidebar (foros, perfil) */
+.page-shell {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  min-height: 100dvh;
+}
+
+.page-shell > main {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 3rem;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 1023px) {
+  .page-shell > main {
+    padding: 1.25rem;
+    padding-top: 4.5rem;
+  }
+}
+
+/* Layout centrado (login, registro) */
+.auth-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  background-color: var(--surface);
+}
+
+.auth-shell__main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 1rem 3rem;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 72rem;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-container-low);
+  border-radius: 2rem;
+  overflow: hidden;
+  box-shadow: 0 32px 64px -12px rgba(6, 30, 41, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+
+  @media (min-width: 768px) { flex-direction: row; }
+}
+
+.auth-card__form {
+  width: 100%;
+  background: var(--surface-container-lowest);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  @media (min-width: 768px) {
+    width: 58.333%;
+    padding: 4rem;
+  }
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}

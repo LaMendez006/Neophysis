@@ -1,0 +1,24 @@
+<!-- @autor LaMendez -->
+
+<div class="login-form">
+  <header class="login-form__header">
+    <h1 class="login-form__title">Iniciar Sesión</h1>
+    <p class="login-form__subtitle">Ingresa a Neophysis</p>
+  </header>
+
+  <form class="login-form__form" (ngSubmit)="false">
+    <div class="login-form__field">
+      <label class="login-form__label" for="email">Correo electrónico</label>
+      <input class="login-form__input" id="email" type="email" placeholder="jane.doe@lab.org" autocomplete="email" />
+    </div>
+    <div class="login-form__field">
+      <label class="login-form__label" for="password">Contraseña</label>
+      <input class="login-form__input" id="password" type="password" placeholder="Mín. 12 caracteres" autocomplete="current-password" />
+    </div>
+    <button class="login-form__submit" type="submit">Iniciar Sesión</button>
+  </form>
+
+  <footer class="login-form__footer">
+    <a class="login-form__link" routerLink="/registro">¿No tienes cuenta? Regístrate</a>
+  </footer>
+</div>
