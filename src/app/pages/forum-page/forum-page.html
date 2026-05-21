@@ -3,7 +3,7 @@
   <app-sidebar-nav />
   <main>
     <app-neo-header />
-    <app-forum-hero />
+    <app-forum-hero (exploreCategories)="scrollToCategories()" />
     <app-forum-categories (categorySelected)="onCategorySelected($event)" />
     <div class="forum-feed-layout">
       <app-forum-posts [categoryFilter]="selectedCategory()" [tagFilter]="selectedTag()" />

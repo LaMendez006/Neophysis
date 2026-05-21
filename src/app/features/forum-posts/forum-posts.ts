@@ -66,7 +66,7 @@ export class ForumPostsComponent {
       categoryDark: true,
       title: 'Metodologías emergentes en la secuenciación de nanoporos',
       excerpt: 'Lorem ipsum dolor sit amet consectetur adipiscing elit ante dictumst at, augue venenatis habitasse convallis ut sagittis inceptos eget a sollicitudin, arcu etiam',
-      votes: 89,
+      votes: 240,
       comments: 22,
       tags: ['#Genética', '#Automatización'],
       date: '2026-05-19T18:30:00Z',
@@ -91,7 +91,7 @@ export class ForumPostsComponent {
 
   protected readonly filteredPosts = computed(() => {
     const query = this.searchQuery().trim().toLowerCase();
-    return this.posts()
+    const results = this.posts()
       .filter((post) => {
         const matchesCategory = !this.selectedCategory() || post.category === this.selectedCategory();
         const matchesTag = !this.selectedTag() || post.tags.includes(this.selectedTag());
@@ -104,6 +104,8 @@ export class ForumPostsComponent {
         }
         return new Date(b.date).getTime() - new Date(a.date).getTime();
       });
+
+    return this.sort() === 'popular' ? results.slice(0, 2) : results;
   });
 
   protected constructor() {
@@ -149,7 +151,7 @@ export class ForumPostsComponent {
   protected copyLink(post: Post): void {
     const url = `${location.origin}/post/${post.id}`;
     navigator.clipboard.writeText(url).then(() => {
-      this.toast.set('Link copied!');
+      this.toast.set('¡Enlace copiado!');
       setTimeout(() => this.toast.set(''), 1400);
     });
   }

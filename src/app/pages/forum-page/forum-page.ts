@@ -10,6 +10,13 @@ import { ForumTrendingComponent } from '../../features/forum-trending/forum-tren
 
 @Component({ selector: 'app-forum-page', standalone: true, imports: [SidebarNavComponent, NeoHeaderComponent, FooterComponent, ForumHeroComponent, ForumCategoriesComponent, ForumPostsComponent, ForumTrendingComponent], templateUrl: './forum-page.html', styleUrl: './forum-page.scss' })
 export class ForumPage {
+  scrollToCategories() {
+  const element = document.getElementById('categories');
+
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
   protected readonly selectedCategory = signal('');
   protected readonly selectedTag = signal('');
 

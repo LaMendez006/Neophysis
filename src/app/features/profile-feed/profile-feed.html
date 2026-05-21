@@ -25,22 +25,47 @@
       </div>
     </ng-container>
     <ng-container *ngIf="activeTab() === 'comentadas'">
-      <div class="profile-feed__empty">
-        <div class="profile-feed__empty-icon">
-          <span class="material-symbols-outlined">chat_bubble</span>
-        </div>
-        <h2 class="profile-feed__empty-title">Todavía no has comentado nada</h2>
-        <p class="profile-feed__empty-desc">Sigue a tu comunidad para empezar a interactuar con publicaciones y debates.</p>
+      <div *ngIf="comments().length > 0; else noComments" class="profile-feed__comments-list">
+        <article *ngFor="let comment of comments()" class="profile-feed__comment-card">
+          <div>
+            <p class="profile-feed__comment-post">Comentado en: {{ comment.postTitle }}</p>
+            <p class="profile-feed__comment-text">{{ comment.text }}</p>
+          </div>
+          <span class="profile-feed__comment-time">{{ comment.time }}</span>
+        </article>
       </div>
+      <ng-template #noComments>
+        <div class="profile-feed__empty">
+          <div class="profile-feed__empty-icon">
+            <span class="material-symbols-outlined">chat_bubble</span>
+          </div>
+          <h2 class="profile-feed__empty-title">Todavía no has comentado nada</h2>
+          <p class="profile-feed__empty-desc">Sigue a tu comunidad para empezar a interactuar con publicaciones y debates.</p>
+        </div>
+      </ng-template>
     </ng-container>
     <ng-container *ngIf="activeTab() === 'guardado'">
-      <div class="profile-feed__empty">
-        <div class="profile-feed__empty-icon">
-          <span class="material-symbols-outlined">bookmark</span>
+      <ng-container *ngIf="bookmarkedPosts().length > 0; else emptySaved">
+        <div class="profile-feed__saved-list">
+          <article *ngFor="let post of bookmarkedPosts()" class="profile-feed__saved-card">
+            <div>
+              <p class="profile-feed__saved-category">{{ post.category }}</p>
+              <h3 class="profile-feed__saved-title">{{ post.title }}</h3>
+              <p class="profile-feed__saved-meta">{{ post.author }} • {{ post.time }}</p>
+            </div>
+            <span class="material-symbols-outlined profile-feed__saved-icon">bookmark</span>
+          </article>
         </div>
-        <h2 class="profile-feed__empty-title">No hay publicaciones guardadas</h2>
-        <p class="profile-feed__empty-desc">Guarda tus artículos favoritos para revisarlos después.</p>
-      </div>
+      </ng-container>
+      <ng-template #emptySaved>
+        <div class="profile-feed__empty">
+          <div class="profile-feed__empty-icon">
+            <span class="material-symbols-outlined">bookmark</span>
+          </div>
+          <h2 class="profile-feed__empty-title">No hay publicaciones guardadas</h2>
+          <p class="profile-feed__empty-desc">Guarda tus artículos favoritos para revisarlos después.</p>
+        </div>
+      </ng-template>
     </ng-container>
   </div>
 
